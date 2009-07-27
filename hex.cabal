@@ -1,5 +1,5 @@
 Name:                hex
-Version:             0.1
+Version:             0.1.1
 Synopsis:            Convert strings into hexadecimal and back.
 Description:         Convert strings into hexadecimal and back.
 License:             BSD3
