@@ -15,7 +15,6 @@
 module Data.Hex(Hex(..)) where
 
 import Control.Monad (liftM)
-import Control.Monad.Fail (MonadFail)
 import qualified Data.ByteString.Char8 as B
 import qualified Data.ByteString.Lazy.Char8 as L
 
@@ -24,7 +23,7 @@ class Hex t where
     -- | Convert string into hexadecimal.
     hex   :: t -> t
     -- | Convert from hexadecimal and fail on invalid input.
-    unhex :: (Monad m, MonadFail m) => t -> m t
+    unhex :: t -> Either String t
 
 
 instance Hex String where
@@ -36,10 +35,10 @@ instance Hex String where
     unhex (a:b:r) = do x <- c a
                        y <- c b
                        liftM (toEnum ((x * 16) + y) :) $ unhex r
-    unhex [_]      = fail "Non-even length"
+    unhex [_]      = Left "Non-even length"
 
 
-c :: (Monad m, MonadFail m) => Char -> m Int
+c :: Char -> Either String Int
 c '0' = return 0
 c '1' = return 1
 c '2' = return 2
@@ -62,7 +61,7 @@ c 'c' = return 12
 c 'd' = return 13
 c 'e' = return 14
 c 'f' = return 15
-c _   = fail "Invalid hex digit!"
+c _   = Left "Invalid hex digit!"
 
 instance Hex B.ByteString where
     hex = B.pack . hex . B.unpack
