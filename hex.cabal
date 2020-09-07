@@ -1,7 +1,7 @@
 Name:                hex
 Version:             0.2.0
 Synopsis:            Convert strings into hexadecimal and back.
-Description:         Convert strings into hexadecimal and back.
+Description:         Convert strings and bytestrings into hexadecimal and back.
 License:             BSD3
 License-file:        COPYING
 Copyright:           Taru Karttunen <taruti@taruti.net>
