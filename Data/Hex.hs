@@ -24,7 +24,9 @@ class Hex t where
     hex   :: t -> t
     -- | Convert from hexadecimal and fail on invalid input.
     unhex :: t -> Either String t
-
+    -- | Convert from hexadecimal and fail on invalud input.
+    unhexM :: MonadFail m => t -> m t
+    unhexM = either fail return . unhex
 
 instance Hex String where
     hex = Prelude.concatMap w
