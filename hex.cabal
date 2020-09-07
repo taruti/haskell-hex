@@ -13,3 +13,4 @@ Exposed-modules:     Data.Hex
 Extensions:          TypeSynonymInstances
 GHC-Options:         -Wall
 Build-Type:	     Simple
+cabal-version:       >= 0
